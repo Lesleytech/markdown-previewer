@@ -1,0 +1,28 @@
+.toolbar {
+    height: 25px;
+    background: #0f0f0f;
+    color: #e8e6e3;
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    right: 15px;
+    font-family: 'Fira Code', monospace;
+}
+
+.toolbar button {
+    border: none;
+    background: none;
+    color: #ff2f2f;
+    outline: none;
+}
+
+
+.toolbar button:hover {
+    color: red;
+}
+
+.toolbar i {
+    pointer-events: none;
+}
