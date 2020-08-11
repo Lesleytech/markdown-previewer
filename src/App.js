@@ -7,13 +7,13 @@ import sampleText from './helpers/sampleText';
 import styles from './App.module.css';
 
 const App = () => {
-  const [editorText, setEditorText] = useState(sampleText);
+  const [text, setText] = useState(sampleText);
   const [isEditor, setIsEditor] = useState(true);
   const [isPreviewer, setIsPreviewer] = useState(true);
 
   const handleChange = (e) => {
     const { value } = e.target;
-    setEditorText(value);
+    setText(value);
   };
 
   const handleClick = (e) => {
@@ -26,56 +26,38 @@ const App = () => {
     }
   };
 
-  const handleClose = (e) => {
-    const { id } = e.target;
-
-    if (id === 'closeEditor') {
-      setIsEditor(false);
-    } else if (id === 'closePreviewer') {
-      setIsPreviewer(false);
-    }
-  };
-
   marked.setOptions({ breaks: true });
 
   useEffect(() => {
-    const editorContainer = document.getElementById('editor-container');
-    const previewerContainer = document.getElementById('previewer-container');
-
-    const isMobile = window.innerWidth < 600;
-
     if (isPreviewer) {
-      document.getElementById('preview').innerHTML = marked(editorText);
+      document.getElementById('preview').innerHTML = marked(text);
     }
-
-    if (isPreviewer && isEditor) {
-      editorContainer.style.width = isMobile ? '100%' : '40%';
-      previewerContainer.style.width = isMobile ? '100%' : '60%';
-    } else if (isPreviewer && !isEditor) {
-      previewerContainer.style.width = '100%';
-    } else if (!isPreviewer && isEditor) {
-      editorContainer.style.width = '100%';
-    }
-  }, [editorText, isEditor, isPreviewer]);
+  }, [text, isPreviewer]);
 
   return (
-    <div className={styles.container}>
-      <TopBar
-        handleOnClick={handleClick}
-        isPreviewer={isPreviewer}
-        isEditor={isEditor}
-      />
-      <div className={styles['main-wrapper']} id="main-wrapper">
-        {isEditor && (
-          <Editor
-            editorText={editorText}
-            handleChange={handleChange}
-            handleClose={handleClose}
-          />
-        )}
-        {isPreviewer && <Previewer handleClose={handleClose} />}
+    <>
+      <div className={styles.container}>
+        <TopBar
+          onClick={handleClick}
+          isPreviewer={isPreviewer}
+          isEditor={isEditor}
+        />
+        <div className={styles['main-wrapper']}>
+          {isEditor && (
+            <Editor
+              text={text}
+              onChange={handleChange}
+              onClose={() => setIsEditor(false)}
+            />
+          )}
+          {isPreviewer && <Previewer onClose={() => setIsPreviewer(false)} />}
+        </div>
       </div>
-    </div>
+      <div className={styles.watermark_container}>
+        <strong className={styles.watermark}>Coding is fun</strong>
+        <strong className={styles.watermark_sub}>i love to code ...</strong>
+      </div>
+    </>
   );
 };
 

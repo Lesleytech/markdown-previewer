@@ -1,23 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap');
+
 .container {
     width: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    z-index: 2;
+    position: relative;
 }
 
 .main-wrapper {
-    display: flex;
-    justify-content: space-between;
-    min-height: 400px;
-    height: calc(100vh - 40px);
     width: 100%;
+    display: flex;
+    flex: 1;
+    overflow-y: auto;
 }
 
-@media (max-width: 600px) {
+.watermark_container {
+    position: absolute;
+    top: 50px;
+    height: calc(100vh - 50px);
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+    text-align: center;
+}
+
+.watermark {
+    font-size: 10vmax;
+    text-transform: uppercase;
+    color: #334;
+    opacity: 0.1;
+    transform: rotate(-35deg);
+
+}
+
+.watermark_sub {
+    font-size: 5vmax;
+    color: #334;
+    opacity: 0.1;
+    transform: rotate(-35deg);
+    font-family: 'Just Another Hand',
+        cursive;
+}
+
+
+@media (max-width: 900px) {
     .main-wrapper {
         flex-direction: column;
-        align-items: center;
-        margin-top: 73px;
+
     }
 }

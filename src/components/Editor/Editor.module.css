@@ -1,27 +1,57 @@
 .container {
-    height: 100%;
-    min-height: 600px;
-    width: 40%;
-    border-right: 4px solid #0f0f0f;
-    position: relative;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container>div {
+    height: 90%;
+    width: 90%;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.titlebar {
+    border: 1px solid #bbc;
+    padding-left: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+}
+
+.close_btn {
+    border: none;
+    outline: none;
+    background: transparent;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+}
+
+.close_btn:hover {
+    color: #f44;
 }
 
 .container textarea {
     width: 100%;
-    height: 100%;
+    flex: 1;
     resize: none;
-    padding: 25px 15px;
-    background: #292c2e;
+    padding: 10px;
     font-family: 'Fira Code', monospace;
-    color: #fff;
     border: none;
     line-height: 1.6;
     outline: none;
+    background: rgba(51, 51, 68, 0.9);
+    color: #fff;
+    overflow-y: auto;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
     .container {
-        border: none;
-        width: 100% !important;
+        height: 100vmax;
     }
 }
